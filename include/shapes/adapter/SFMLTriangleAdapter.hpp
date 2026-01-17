@@ -1,0 +1,27 @@
+#pragma once
+
+#include <memory>
+#include <cmath>
+
+#include "Point.hpp"
+#include "IDrawableShape.hpp"
+#include "../../Constants.hpp"
+
+class SFMLTriangleAdapter : public IDrawableShape
+{
+public:
+    SFMLTriangleAdapter(const Point &p1, const Point &p2, const Point &p3);
+
+    float GetArea() const override;
+    float GetPerimeter() const override;
+    std::string GetName() const override;
+
+    void Accept(Visitor &visitor) const override;
+    std::string ToString() const override;
+
+    std::shared_ptr<sf::Shape> GetShape() const override;
+
+private:
+    std::shared_ptr<sf::ConvexShape> m_triangle;
+    Point m_p1, m_p2, m_p3;
+};
